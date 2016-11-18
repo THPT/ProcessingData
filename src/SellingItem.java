@@ -8,7 +8,7 @@ public class SellingItem implements Serializable {
 	long quantity;
 	long revenue;
 	double netRevenue;
-	Date orderDate;
+	long orderDate;
 
 	public String getProductId() {
 		return productId;
@@ -42,24 +42,23 @@ public class SellingItem implements Serializable {
 		this.netRevenue = netRevenue;
 	}
 
-	public Date getOrderDate() {
+	public long getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(long orderDate) {
 		this.orderDate = orderDate;
 	}
-	
-	public String getArgs(){
+
+	public String getArgs() {
 		return "?,?,?,?,?";
 	}
-	
-	
-	public String getColumns(){
+
+	public String getColumns() {
 		return "product_id, quantity, revenue, net_revenue, order_date";
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(productId, quantity, revenue, netRevenue, orderDate);
+		return Arrays.asList(productId, quantity, revenue, netRevenue, new Date((long) orderDate * 1000));
 	}
 }

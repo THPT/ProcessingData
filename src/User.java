@@ -4,17 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class User implements Serializable {
-	int id;
+	long id;
 	int age;
 	int gender;
 	String location;
-	Date createdAt;
+	long createdAt;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -42,11 +42,11 @@ public class User implements Serializable {
 		this.location = location;
 	}
 
-	public Date getCreatedAt() {
+	public long getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(long createdAt) {
 		this.createdAt = createdAt;
 	}
 	
@@ -59,6 +59,6 @@ public class User implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(id, age, gender, location, createdAt);
+		return Arrays.asList(id, age, gender, location, new Date((long)createdAt*1000));
 	}
 }

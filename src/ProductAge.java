@@ -2,18 +2,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProductAge implements Serializable{
-	int id;
+public class ProductAge implements Serializable {
 	String productId;
 	int age;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getProductId() {
 		return productId;
@@ -30,16 +21,16 @@ public class ProductAge implements Serializable{
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	public String getArgs(){
-		return "?,?,?,?,?";
+
+	public String getArgs() {
+		return "?,?";
 	}
-	
-	public String getColumns(){
-		return "id, product_id, age";
+
+	public String getColumns() {
+		return "product_id, age";
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(id, productId, age);
+		return Arrays.asList(productId, age);
 	}
 }

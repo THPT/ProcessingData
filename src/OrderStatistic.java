@@ -8,33 +8,24 @@ public class OrderStatistic implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5581773326771321911L;
-	int id;
-	int storeId;
-	Date orderDate;
+	long storeId;
+	long orderDate;
 	long revenue;
-	int totalOrder;
+	long totalOrder;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getStoreId() {
+	public long getStoreId() {
 		return storeId;
 	}
 
-	public void setStoreId(int storeId) {
+	public void setStoreId(long storeId) {
 		this.storeId = storeId;
 	}
 
-	public Date getOrderDate() {
+	public long getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(long orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -46,22 +37,23 @@ public class OrderStatistic implements Serializable {
 		this.revenue = revenue;
 	}
 
-	public int getTotalOrder() {
+	public long getTotalOrder() {
 		return totalOrder;
 	}
 
-	public void setTotalOrder(int totalOrder) {
+	public void setTotalOrder(long totalOrder) {
 		this.totalOrder = totalOrder;
 	}
-	public String getArgs(){
-		return "?,?,?,?,?";
+
+	public String getArgs() {
+		return "?,?,?,?";
 	}
-	
-	public String getColumns(){
-		return "id, store_id, order_date, revenue, total_order";
+
+	public String getColumns() {
+		return "store_id, order_date, revenue, total_order";
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(id, storeId, orderDate, revenue, totalOrder);
+		return Arrays.asList(storeId, new Date((long) orderDate * 1000), revenue, totalOrder);
 	}
 }
