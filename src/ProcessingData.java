@@ -102,8 +102,8 @@ public class ProcessingData {
 	}
 
 	public static void importUser(SparkSession spark) {
-		Dataset<Row> userDs = spark
-				.sql("SELECT user_id as id, age, gender, unix_timestamp(creation_date) as createdAt, location FROM user");
+		Dataset<Row> userDs = spark.sql(
+				"SELECT user_id as id, age, gender, unix_timestamp(creation_date) as createdAt, location FROM user");
 		try {
 			connection.createStatement();
 			Encoder<User> userEncoder = Encoders.bean(User.class);
@@ -216,13 +216,12 @@ public class ProcessingData {
 				.config("spark.sql.warehouse.dir", "/user/hive/warehouse").enableHiveSupport().getOrCreate();
 		spark.sql("show tables").show();
 
-		// Extract category
-		// importCategory(spark);
-		// importProduct(spark);
-		// importSellingItems(spark);
-//		importUser(spark);
-//		 importProductAge(spark);
-//		 importOrderStatistic(spark);
-		 importUserStatistic(spark);
+		importCategory(spark);
+		importProduct(spark);
+		importSellingItems(spark);
+		importUser(spark);
+		importProductAge(spark);
+		importOrderStatistic(spark);
+		importUserStatistic(spark);
 	}
 }
