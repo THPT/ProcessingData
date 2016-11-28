@@ -1,18 +1,16 @@
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 public class Store implements Serializable {
-	int storeID;
+	long id;
 	String name;
-	int userId;
+	long userId;
 	String location;
 
-	public int getStoreID() {
-		return storeID;
-	}
+	public long getId() { return id; }
 
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
-	}
+	public void setId(long id) { this.id = id; }
 
 	public String getName() {
 		return name;
@@ -22,13 +20,9 @@ public class Store implements Serializable {
 		this.name = name;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
+	public long getUserId() { return userId; }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	public void setUserId(long userId) { this.userId = userId; }
 
 	public String getLocation() {
 		return location;
@@ -38,4 +32,9 @@ public class Store implements Serializable {
 		this.location = location;
 	}
 
+	public String getArgs() { return "?,?,?,?"; }
+
+	public String getColumns() { return "id, name, user_id, location"; }
+
+	public List<Object> getParameters() { return Arrays.asList(id, name, userId, location); }
 }

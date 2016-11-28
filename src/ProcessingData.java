@@ -16,7 +16,48 @@ public class ProcessingData {
 	static Connection connection;
 
 	private static Connection createConnection() throws Exception {
-		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?user=grok&password=grok&ssl=false");
+//		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?user=grok&password=grok&ssl=false");
+		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?user=thpt&password=w5sU6BJK&ssl=false");
+//		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?ssl=false");
+	}
+
+	public static void importStore(SparkSession spark) {
+		Dataset<Row> storeDs = spark.sql("SELECT store_id as id, name, user_id as userId, location FROM selling_store");
+		try {
+			connection.createStatement();
+
+			String tableName = "stores";
+			String tempTableName = tableName + "_" + getTimeString();
+			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
+					+ "(" +
+					"id serial PRIMARY KEY NOT NULL," +
+					"name text," +
+					"user_id int," +
+					"location text" +
+					")");
+			stm.execute();
+
+			Encoder<Store> storeEncoder = Encoders.bean(Store.class);
+			Dataset<Store> storeDF = storeDs.as(storeEncoder);
+			storeDF.foreach(new ForeachFunction<Store>() {
+				@Override
+				public void call(Store store) throws Exception {
+					String query = String.format("INSERT INTO " + tempTableName + "(%s) VALUES(%s)", store.getColumns(), store.getArgs());
+					PreparedStatement stm = connection.prepareStatement(query);
+					int i = 0;
+					for (Object object : store.getParameters()) {
+						stm.setObject(++i, object);
+					}
+					stm.execute();
+				}
+			});
+
+			swapTable(tableName, tempTableName);
+
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void importUserStatistic(SparkSession spark) {
@@ -342,5 +383,6 @@ public class ProcessingData {
 		importProductAge(spark);
 		importOrderStatistic(spark);
 		importUserStatistic(spark);
+		importStore(spark);
 	}
 }
