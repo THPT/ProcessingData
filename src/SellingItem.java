@@ -59,6 +59,8 @@ public class SellingItem implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(productId, quantity, revenue, netRevenue, new Date((long) orderDate * 1000));
+		Object[] list = new Object[]{productId, quantity, revenue, netRevenue, new Date((long) orderDate * 1000)};
+
+		return Arrays.asList(list);
 	}
 }

@@ -54,6 +54,8 @@ public class OrderStatistic implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(storeId, new Date((long) orderDate * 1000), revenue, totalOrder);
+	    Object[] list = new Object[]{storeId, new Date((long) orderDate * 1000), revenue, totalOrder};
+
+		return Arrays.asList(list);
 	}
 }

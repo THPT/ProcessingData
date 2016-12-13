@@ -31,6 +31,8 @@ public class ProductAge implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(productId, age);
+		Object[] list = new Object[]{productId, age};
+
+		return Arrays.asList(list);
 	}
 }

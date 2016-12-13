@@ -17,7 +17,7 @@ public class ProcessingData {
 
 	private static Connection createConnection() throws Exception {
 //		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?user=grok&password=grok&ssl=false");
-		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?user=thpt&password=w5sU6BJK&ssl=false");
+		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?user=thtp&password=w5sU6BJK&ssl=false");
 //		return DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/grok?ssl=false");
 	}
 
@@ -27,7 +27,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "stores";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"id serial PRIMARY KEY NOT NULL," +
@@ -68,7 +68,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "user_statistics";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"    id serial PRIMARY KEY NOT NULL," +
@@ -112,7 +112,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "order_statistics";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"    id serial PRIMARY KEY NOT NULL," +
@@ -155,7 +155,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "product_ages";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"    id serial PRIMARY KEY NOT NULL," +
@@ -196,7 +196,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "users";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"    id serial PRIMARY KEY NOT NULL," +
@@ -240,7 +240,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "selling_items";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"    id serial PRIMARY KEY NOT NULL," +
@@ -284,7 +284,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "products";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(" +
 					"    id text PRIMARY KEY NOT NULL," +
@@ -326,7 +326,7 @@ public class ProcessingData {
 			connection.createStatement();
 
 			String tableName = "categories";
-			String tempTableName = tableName + "_" + getTimeString();
+			final String tempTableName = tableName + "_" + getTimeString();
 			PreparedStatement stm = connection.prepareStatement("CREATE TABLE " + tempTableName
 					+ "(id serial PRIMARY KEY NOT NULL, category_name text)");
 			stm.execute();

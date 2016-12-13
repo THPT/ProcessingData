@@ -42,6 +42,8 @@ public class UserStatistic implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(userId, new Date((long) orderDate * 1000), spend);
+		Object[] list = new Object[]{userId, new Date((long) orderDate * 1000), spend};
+
+		return Arrays.asList(list);
 	}
 }

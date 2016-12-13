@@ -36,5 +36,9 @@ public class Store implements Serializable {
 
 	public String getColumns() { return "id, name, user_id, location"; }
 
-	public List<Object> getParameters() { return Arrays.asList(id, name, userId, location); }
+	public List<Object> getParameters() {
+	    Object[] list = new Object[]{id, name, userId, location};
+
+        return Arrays.asList(list);
+	}
 }

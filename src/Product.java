@@ -59,7 +59,9 @@ public class Product implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(id, productName, price, subcategory, category, storeId);
+	    Object[] list = new Object[]{id, productName, price, subcategory, category, storeId};
+
+		return Arrays.asList(list);
 	}
 
 }

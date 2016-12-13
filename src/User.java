@@ -59,6 +59,8 @@ public class User implements Serializable {
 	}
 
 	public List<Object> getParameters() {
-		return Arrays.asList(id, age, gender, location, new Date((long)createdAt*1000));
+	    Object[] list = new Object[]{id, age, gender, location, new Date((long)createdAt*1000)};
+
+	    return Arrays.asList(list);
 	}
 }
